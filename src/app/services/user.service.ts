@@ -1,37 +1,77 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, throwError } from 'rxjs';
+import { CacheService } from './cache.service';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private usernameSubject = new BehaviorSubject<string>('');
-  username$ = this.usernameSubject.asObservable();
+  
 
-  constructor(private router: Router) {
-    const savedUsername = localStorage.getItem('username');
-    if (savedUsername) {
-      this.usernameSubject.next(savedUsername);
+  constructor(private cacheService:CacheService,private router:Router,private apiService:ApiService){
+
+  }
+
+  
+
+  get team(){
+    let cache = this.cacheService.get('team')
+    if(cache){
+      return cache
+    }
+    return {};
+  }
+
+
+  checkAuth(){
+    let cache = this.cacheService.get('team')
+    if(cache && cache?.teamId){
+      return true;
+    }
+    this.router.navigate(['/login'])
+    return false;
+  }
+
+  getUsername(){
+    let cache = this.cacheService.get('team')
+    if(cache){
+      return cache?.username
+    }
+
+    return '';  
+  }
+
+  fetchTeamDetails(){
+    try{
+      let teamId =  this.cacheService.get('team')?.teamId
+      this.apiService.get(`/teams/${teamId}`).pipe(catchError((err)=>{
+        return throwError(() => err)
+      })).subscribe({
+        next: (response: any) => {
+          if (response && response.data) {
+            console.log(response?.data)
+            if(response.data.team){
+                this.cacheService.set('team',response.data.team)
+            }
+          }
+        },
+        error: () => {
+        }
+      })
+    }catch(err){
+      
     }
   }
 
-  setUsername(username: string): void {
-    this.usernameSubject.next(username);
-    localStorage.setItem('username', username);
-  }
 
-  getUsername(): string {
-    return this.usernameSubject.value || localStorage.getItem('username') || '';
-  }
-
-  clearUsername(): void {
-    this.usernameSubject.next('');
-    localStorage.removeItem('username'); 
+  clear(){
+    this.cacheService.delete('team');
   }
 
   logout(): void {
-    this.clearUsername(); 
+    this.clear(); 
     this.router.navigate(['/login']);
   }
 }

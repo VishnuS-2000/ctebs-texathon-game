@@ -324,7 +324,7 @@ export class CapArenaComponent {
 
     this.loading = true;
 
-    const postBody = {code:this.combinedCode,teamId:21}
+    const postBody = {code:this.combinedCode,teamId:22}
     this.apiService
       .post('/submit/round2', postBody)
       .pipe(
