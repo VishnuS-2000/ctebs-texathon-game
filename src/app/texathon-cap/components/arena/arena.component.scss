@@ -1,0 +1,159 @@
+.appbar {
+  background-color: #000000;
+  min-height: 48px;
+  max-height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0px 8px;
+
+  gap: 25px;
+
+  .appbar-logo{
+    height: 48px;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #c6cdd5;
+    margin-right: 25px;
+    span {
+      color: #7ce38b;
+      font-family: "Lilita One", sans-serif;
+    }
+  }
+}
+.appbar-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+
+  .divider {
+    color: rgba(255, 255, 255, 0.11);
+  }
+}
+
+.appbar-right {
+  display: flex;
+  align-items: center;
+  padding: 0px 14px;
+  gap: 25px;
+
+  .app-timer {
+    font-size: 14px;
+    background: none;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 1);
+  }
+
+  .app-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(43, 182, 115, 1);
+    padding: 3px 12px;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    height: 30px;
+    width: 120px;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 500;
+    cursor: pointer;
+  }
+}
+
+.appbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  vertical-align: middle;
+  gap: 8px;
+  color: #c5c5c5;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.code_wrapper {
+  display: flex;
+  height: calc(100% - 48px);
+  flex: 1;
+  position: relative;
+
+  .editor-title {
+    padding: 8px 20px;
+    background-color: #1e1e1e;
+    font-size: 12px;
+    color: #c5c5c5;
+    font-weight: 500;
+  }
+}
+
+.app_left_wrapper,
+.app_right_wrapper {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.editor {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  font-family: "Source Code Pro", monospace;
+}
+
+.editor-top {
+  height: 50%;
+  min-width: 250px;
+}
+
+.editor-down {
+  height: 50%;
+}
+
+::ng-deep.editor .editor-container {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.output {
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: flex;
+}
+.resize-handle {
+  width: 1px;
+  background: #21262d;
+  cursor: ew-resize !important;
+  position: absolute;
+  height: 100%;
+  z-index: 10;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.resize-handle-horizontal {
+  width: 100%;
+  background: #21262d !important;
+  height: 2px;
+  left: 0;
+  cursor: ns-resize !important;
+  transform: translateY(-50%);
+}

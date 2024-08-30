@@ -1,0 +1,116 @@
+<div class="documentation-wrapper">
+  <h1 class="title">Documentation</h1>
+
+  <div class="navigation-wrapper">
+    <div class="navigation-menu">
+      <button
+        class="navigation-button"
+        [class.selected]="i == selectedMenu"
+        *ngFor="let menu of menus; let i = index"
+        (click)="selectMenu(i)"
+      >
+        {{ menu }}
+      </button>
+    </div>
+    <div class="navigation-content">
+      <div class="color-matrix" *ngIf="selectedMenu == 0">
+        <div class="type-wrapper">
+          <div class="types">
+            <button
+              class="type"
+              [class.selected]="i == colorTypeSelected"
+              (click)="selectColorType(i)"
+              *ngFor="let type of colorTypes; let i = index"
+            >
+              {{ type.name }}
+            </button>
+          </div>
+
+
+          <div class="copy-wrapper">
+            <p class="selector">{{ colorClass }}</p>
+
+            <button *ngIf="!copiedToClipBoard" (click)="copyToClipBoard(colorClass)" class="copy">
+              <mat-icon >
+                content_copy
+              </mat-icon>
+              <span>Copy class</span>
+            </button>
+            
+            <button *ngIf="copiedToClipBoard"  class="copy">
+              <mat-icon >
+                check
+              </mat-icon>
+              <span> Class copied</span>
+            </button>
+          </div>
+          
+        </div>
+
+        <div *ngFor="let color of colors;let i=index;" class="color-row">
+          <div
+            *ngFor="let scale of colorScales;let j=index"
+            [ngClass]="getColorClass(color, scale)"
+            class="indicator"
+            (click)="selectColorScale(i,j)"
+          >
+            <div>{{ color }}</div>
+            -
+            <span>{{ scale }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="shape-matrix" *ngIf="selectedMenu == 1">
+        <div class="type-wrapper">
+          <div class="types">
+            <div class="copy-wrapper">
+              <button
+                class="type"
+                [class.selected]="i == shapeSelected"
+                (click)="selectShape(i)"
+                *ngFor="let type of shapes; let i = index"
+              >
+                {{ type.name }}
+              </button>
+            </div>
+
+          </div>
+
+          <div class="copy-wrapper">
+            <p class="selector">
+              {{shapeColorClass}}
+            </p>
+            <button *ngIf="!copiedToClipBoard" (click)="copyToClipBoard(shapeColorClass)" class="copy">
+              <mat-icon >
+                content_copy
+              </mat-icon>
+              <span>Copy class</span>
+            </button>
+            
+            <button *ngIf="copiedToClipBoard" class="copy">
+              <mat-icon >
+                check
+              </mat-icon>
+              <span> Class copied</span>
+            </button>
+           
+        </div>
+          </div>
+
+          <div class="shape-sizes">
+            <button *ngFor="let size of shapes[shapeSelected]?.sizes;let i=index;" class="type" [class.selected]="i==shapeSizeSelected" (click)="selectShapeSize(i)">
+              {{size}}
+            </button>
+          </div>
+
+         
+          <div class="shape-preview">
+            <div [ngClass]="[currentShapeSelectedClass, currentColorSelectedClass[0],currentColorSelectedClass[1],currentColorSelectedClass[2]]"></div>
+          </div>
+        </div>
+
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,175 @@
+
+
+.documentation-wrapper{
+
+    background-color: #1e1e1e;
+    padding: 15px;
+    width: 100%;
+    min-height: 100%;
+
+    position: absolute;
+
+
+    .title{
+        font-size: 18px;
+        font-weight: 500;
+        color: #c5c5c5;
+    }
+
+
+    
+}
+
+.navigation-wrapper{
+    display: flex;
+    margin-top: 25px;
+    .navigation-menu{
+        display: flex;
+        flex-direction: column;
+        flex: 0.20;
+        gap: 8px;
+
+
+        .navigation-button{
+            width: 100%;
+            height: 48px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.11);
+            border-radius: 8px;
+            border: none;
+            outline:none;
+            font-weight: 500;
+            color: #c5c5c5;
+            cursor: pointer;
+        
+            &.selected{
+                background-color: #c5c5c5;
+                color: #000;
+            }
+        }
+    }
+
+    .navigation-content{
+        flex:0.80;
+    }
+
+    .color-matrix {
+        height: 100%;
+        padding: 0px 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+       
+    }
+    
+    .color-row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+
+    }
+
+    .type-wrapper{
+        display: flex;
+        justify-content: space-between;
+
+        .types{
+            display: flex;
+            gap: 8px;
+
+        }
+        
+    }
+
+    .type{
+        min-width: 48px;
+        padding: 8px;
+        font-size: 14px;
+        border-radius: 8px;
+        outline: none;
+        border: none;
+        cursor:pointer;
+        background-color: rgba(255, 255, 255, 0.11);
+        color: #c5c5c5;
+        height: 32px;
+        &.selected{
+            background-color: #c5c5c5;
+            color: #000;
+
+        }
+    }
+
+    .selector{
+        color: #c5c5c5;
+    }
+    
+    .indicator {
+        width: 72px;
+        height: 40px;
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        border: 1px solid;
+        border-color: #000;
+        justify-content: center;
+        align-items: center;
+        font-size: 11px;
+        font-weight: 500;
+
+        
+    }
+    .shape-matrix{
+        max-width: 90%;
+        padding: 0px 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .shape-sizes{
+        display: flex;
+        gap: 8px;
+    }
+    .shape-row{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+    }
+    
+    .shape{
+        background-color: #c5c5c5;
+    }
+    
+    .copy-wrapper{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .copy{
+            
+            color: #c5c5c5;
+            background: none;
+            outline:none;
+            border:none;
+            display: flex;
+            align-items: center;
+            mat-icon{
+                font-size: 21px;
+                cursor: pointer;
+            }
+        }
+    }
+    .shape-preview{
+        padding: 25px 0px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .output{
+            background-color: #c5c5c5;
+
+        }
+    }
+}

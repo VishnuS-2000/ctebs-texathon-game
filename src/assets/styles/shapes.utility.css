@@ -1,0 +1,221 @@
+/*circle*/
+
+.circle-50{
+    height:50px;
+    width: 50px;
+    border-radius: 50%;
+    border:1px solid;
+}
+.circle-100{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border:1px solid;
+}
+.circle-150{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border:1px solid;
+}
+.circle-200{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border:1px solid;
+}
+
+.circle-250{
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    border:1px solid;
+}
+.circle-300{
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    border:1px solid;
+}
+.circle-350{
+    height: 400px;
+    width: 400px;
+    border-radius: 50%;
+    border:1px solid;
+}
+.circle-400{
+    height: 400px;
+    width: 400px;
+    border-radius: 50%;
+    border:1px solid;
+}
+.circle-450{
+    height: 450px;
+    width: 450px;
+    border-radius: 50%;
+    border:1px solid;
+}
+.circle-500{
+    height: 500px;
+    width: 500px;
+    border-radius: 50%;
+    border:1px solid;
+}
+
+/* Square */
+
+.square-50 {
+    height: 50px;
+    width: 50px;
+    border:1px solid;
+}
+
+.square-100 {
+    height: 100px;
+    width: 100px;
+    border:1px solid;
+}
+
+.square-150 {
+    height: 150px;
+    width: 150px;
+    border:1px solid;
+}
+
+.square-200 {
+    height: 200px;
+    width: 200px;
+    border:1px solid;
+}
+
+.square-250 {
+    height: 250px;
+    width: 250px;
+    border:1px solid;
+}
+
+.square-300 {
+    height: 300px;
+    width: 300px;
+    border:1px solid;
+}
+
+.square-350 {
+    height: 350px;
+    width: 350px;
+    border:1px solid;
+}
+.square-400 {
+    height: 400px;
+    width: 400px;
+    border:1px solid;
+}
+.square-450 {
+    height: 450px;
+    width: 450px;
+    border:1px solid;
+}
+.square-500 {
+    height: 500px;
+    width: 500px;
+    border:1px solid;
+}
+
+
+.triangle-50{
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    border:1px solid;
+}
+.triangle-100{
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    border:1px solid;
+}
+
+.triangle-150{
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    margin: 10px;
+    width: 150px;
+    height: 150px;
+    border:1px solid;
+}
+
+.triangle-200{
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    margin: 10px;
+    width: 200px;
+    height: 200px;
+    border:1px solid;
+}
+
+.triangle-250{
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    margin: 10px;
+    width: 250px;
+    height: 250px;
+    border:1px solid;
+}
+
+.triangle-300{
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    margin: 10px;
+    width: 300px;
+    height: 300px;
+    border:1px solid;
+}
+
+.triangle-350{
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    margin: 10px;
+    width: 350px;
+    height: 350px;
+    border:1px solid;
+}
+
+.triangle-400{
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    margin: 10px;
+    width: 400px;
+    height: 400px;
+    border:1px solid;
+}
+
+.petal {
+    width: 100px;
+    height: 100px;
+    background: red; /* Petal color */
+    border-radius: 50% 50% 0 0;
+    position: relative;
+    transform: rotate(-45deg);
+    margin: 50px;
+  }
+
+  .petal::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    background: red; /* Petal color */
+    border-radius: 50%;
+    transform: rotate(90deg);
+  }
+
+
+.spiral {
+    width: 100px;
+    height: 100px;
+    border: 16px solid #4B0082; /* Indigo */
+    border-radius: 50%;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    display: inline-block;
+    transform: rotate(45deg);
+    margin: 10px;
+  }

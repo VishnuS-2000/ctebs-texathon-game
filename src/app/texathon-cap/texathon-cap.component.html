@@ -1,0 +1,8 @@
+
+<div class="wrapper">
+    <cap-start (startChanged)="startArena()" (resumeChanged)="resumeArena()" [showResume]="isPaused" *ngIf="!isStarted || isStarted && isPaused">
+    </cap-start>
+
+    <cap-arena *ngIf="isStarted && !this.isPaused"></cap-arena>
+
+</div>

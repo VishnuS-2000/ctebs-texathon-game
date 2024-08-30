@@ -1,0 +1,44 @@
+[
+  {
+    "type": "multiple-choice",
+    "question": "_________French term for exclusive one-of-kind” high fashion",
+    "options": ["Boutique", "Show room", "Out let", "Haute couture’s"],
+    "answer": "Haute couture’s"
+  },
+  {
+    "type": "multiple-choice",
+    "question": "Which fiber is popularly called ‘Golden fiber’?",
+    "options": ["Cotton", "Silk", "Jute", "Flax"],
+    "answer": "Jute"
+  },
+  {
+    "type": "multiple-choice",
+    "question": "Which fashion event showcases upcoming fashion collections and designs to buyers and the media?",
+    "options": ["Fashion Week", "Fashion Showdown", "Style Exhibition", "Couture Expo"],
+    "answer": "Fashion Week"
+  },
+  {
+    "type": "multiple-choice",
+    "question": "Which type of fabric is derived from silkworms and is known for its luxurious, smooth texture?",
+    "options": ["Cotton", "Wool", "Satin", "Denim"],
+    "answer": "Satin"
+  },
+  {
+    "type": "multiple-choice",
+    "question": "Levi Strauss and Jacob Davis are usually credited with inventing which type of pants?",
+    "options": ["Chinos", "Leggings", "Denim jeans"],
+    "answer": "Denim jeans"
+  },
+  {
+    "type": "checkbox",
+    "question": "Select all that apply: Which materials are considered natural fibers?",
+    "options": ["Cotton", "Polyester", "Wool", "Nylon"],
+    "answer": ["Cotton", "Wool"]
+  },
+  {
+    "type": "fill-in-the-blank",
+    "question": "_________ is known as the ‘Golden fiber’.",
+    "answer": "Jute"
+  }
+  ]
+  

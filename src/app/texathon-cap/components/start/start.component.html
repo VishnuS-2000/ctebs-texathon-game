@@ -1,0 +1,88 @@
+<div class="start-wrapper">
+    <div class="logo-wrapper">
+        <img src="assets/logo/ctebs.svg" class="company-logo"/>
+        <img src="assets/logo/presents.svg" class="presents"/>
+        <img src="assets/logo/texathon.png" class="event-logo"/>
+        
+
+
+        <div class="rounds-container">
+
+        <div class="round-card" *ngFor="let round of rounds">
+          <div class="card-header">
+            <span class="title">{{round}}</span>
+            <div class="card-body">
+                <span>
+                  <mat-icon>clock</mat-icon>
+                </span>
+            </div>
+            <button  class="app-start" (click)="start()" >
+              <mat-progress-spinner
+              [diameter]="20"
+              [strokeWidth]="2"
+              color="primary"
+              mode="indeterminate"
+              class="custom-spinner"
+              *ngIf="loading"
+              >
+              </mat-progress-spinner>
+             <span *ngIf="!loading">Start</span>
+          </button>    
+          </div>
+        </div>
+    </div>
+        <ng-template #startTemplate>
+
+        <!-- <form  class="form" [formGroup]="loginForm" (ngSubmit)="submit($event)">
+            <div class="form-input-wrapper">
+            <div class="p-field">
+                <label for="username">Username</label>
+                <span class="p-input-icon-left">
+                  <i class="pi pi-user"></i>
+                  <input id="username" type="text" pInputText formControlName="username"/>
+                </span>
+                <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="p-error">
+                  Username is required.
+                </div>
+              </div>
+            
+              <div class="p-field">
+                <label for="password">Password</label>
+                <span class="p-input-icon-left p-input-icon-right">
+                  <i class="pi pi-lock"></i>
+                  <input id="password" [type]="passwordFieldType" pInputText formControlName="password"/>
+                  <i class="pi" [ngClass]="passwordFieldType === 'password' ? 'pi-eye' : 'pi-eye-slash'" (click)="togglePasswordVisibility()"></i>
+                </span>
+                <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="p-error">
+                  Password is required.
+                </div>
+              </div>
+            </div> -->
+<!--     
+                <button  class="app-start" (click)="start()" >
+                    <mat-progress-spinner
+                    [diameter]="20"
+                    [strokeWidth]="2"
+                    color="primary"
+                    mode="indeterminate"
+                    class="custom-spinner"
+                    *ngIf="loading"
+                    >
+                    </mat-progress-spinner>
+                   <span *ngIf="!loading">Start</span>
+                </button>     -->
+            <!-- </form> -->
+
+        </ng-template>
+
+        
+       
+         
+        
+
+
+        
+    </div>
+ 
+
+</div>

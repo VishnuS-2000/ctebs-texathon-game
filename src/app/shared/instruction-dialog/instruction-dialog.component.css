@@ -1,0 +1,47 @@
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.instruction-card {
+  max-width: 600px; 
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 30px;
+  background-color: #f8f9fa;
+}
+
+.card-title {
+  font-weight: 700;
+  font-size: 24px;
+  color: #343a40;
+}
+
+.list-group-item {
+  background-color: transparent; 
+  font-size: 18px;
+  padding: 15px 0; 
+  border: none;
+  color: #495057;
+}
+
+.btn-block {
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.btn-success {
+  background-color: #28a745; 
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #218838; 
+}

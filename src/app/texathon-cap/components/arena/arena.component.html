@@ -1,0 +1,79 @@
+<div class="appbar">
+  <img src="assets/logo/texathon.png" class="appbar-logo"/>
+
+  <div class="appbar-left">
+    <button (click)="updatePreview()" class="appbar-btn">
+      <span>Run</span>
+    </button>
+    <span class="divider">|</span>
+    <button (click)="openDocumentation()" class="appbar-btn">
+      <span>Documentation</span>
+    </button>
+    <span class="divider">|</span>
+    <button (click)="updatePreview()" class="appbar-btn">
+      <span>Rules</span>
+    </button>
+  </div>
+
+  <div class="appbar-right">
+    <button class="app-timer">
+      <mat-icon>timer</mat-icon>
+      <span> {{ this.timeLeft }}</span>
+    </button>
+
+    <button (click)="submit($event)" class="app-submit">
+      <mat-progress-spinner
+      [diameter]="20"
+      [strokeWidth]="2"
+      color="primary"
+      mode="indeterminate"
+      class="custom-spinner"
+      *ngIf="loading"
+      >
+</mat-progress-spinner>
+      <span *ngIf="!loading">Submit</span>
+    </button>
+  </div>
+</div>
+<div class="code_wrapper">
+  <div class="app_left_wrapper" #leftWrapper>
+    <span class="editor-title">HTML</span>
+
+    <div class="editor-top" #htmlContainer>
+      <ngx-monaco-editor
+        [options]="htmlEditorOptions"
+        class="editor"
+        [formControl]="htmlControl"
+      ></ngx-monaco-editor>
+    </div>
+
+    <div
+      class="resize-handle-horizontal"
+      (mousedown)="onVerticalResize($event)"
+    ></div>
+    <span class="editor-title">CSS</span>
+
+    <div class="editor-down" #cssContainer>
+      <ngx-monaco-editor
+        [options]="cssEditorOptions"
+        class="editor"
+        [formControl]="cssControl"
+      ></ngx-monaco-editor>
+    </div>
+  </div>
+
+  <!-- <div class="editor"  #htmlContainer></div> -->
+  <!-- <div class="editor" #cssContainer></div> -->
+
+  <!-- <div class="resize-handle" (mousedown)="onMouseDown($event)"></div> -->
+  <div class="app_right_wrapper" #rightWrapper>
+    <!-- <div class="" [innerHTML]="combinedCode"></div> -->
+    <iframe id="preview" class="output" width="auto" ></iframe>
+
+    <!-- <ngx-monaco-editor
+        [options]="jsEditorOptions"
+        [formControl]="jsControl"
+        class="editor"
+      ></ngx-monaco-editor> -->
+  </div>
+</div>

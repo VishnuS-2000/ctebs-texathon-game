@@ -1,0 +1,23 @@
+<div class="login-container">
+  <div class="login-images">
+    <img src="../assets/images/ctebs.svg" style="height: 30%; width:50%;">
+    <img src="../assets/images/presents.svg" style="height: 20%; width:10%;align-items: center;">
+    <img src="../assets/images/texathon.png" style="height: 80%; width:70%;">
+  </div>
+  <div class="card login-card">
+    <div class="card-body">
+      <h2 class="card-title text-center">Login</h2>
+      <form>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" [(ngModel)]="username" name="username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password">
+        </div>
+        <button type="button" class="btn btn-primary btn-block" (click)="login()">Login</button>
+      </form>
+    </div>
+  </div>
+</div>

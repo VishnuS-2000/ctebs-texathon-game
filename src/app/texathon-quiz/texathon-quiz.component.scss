@@ -1,0 +1,82 @@
+.bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #000; /* Light background color */
+  }
+  
+  .quiz-card {
+    padding-top:0px;
+    max-width: 800px; /* Set a max-width for the quiz card */
+    width: 100%; /* Ensure it takes full width within its max-width */
+    border-radius: 10px; /* Rounded corners for the card */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Shadow for the card */
+    background-color: #ffffff; /* White background for the card */
+  }
+  
+  .card-body {
+    padding: 50px; /* Padding inside the card */
+  }
+  
+  .question-number {
+    font-weight: 500;
+    font-size: 20px;
+    color: #343a40;
+    margin-bottom: 10px;
+  }
+  
+  .question-text {
+    font-weight: 300;
+    font-size: 22px;
+    color: #495057;
+    margin-bottom: 20px;
+  }
+  
+  .form-check-label {
+    font-size: 18px;
+    color: #495057;
+  }
+  
+  .button-container {
+    margin-top: 20px;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    font-weight: bold;
+  }
+  
+  .btn-primary {
+    background-color: #28a745;
+    border: none;
+    font-weight: bold;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+  }
+  
+  
+  .results-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .results-text {
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
