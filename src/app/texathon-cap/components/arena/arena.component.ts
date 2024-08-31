@@ -14,6 +14,7 @@ import { catchError, debounceTime, throwError } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
+import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'cap-arena',
@@ -101,7 +102,10 @@ p {
   combinedCode:any;
   timeLeft: string = '01:00:00';
   private countdownInterval: any;
- 
+
+  warnTime:number= 10*60;
+  showTimeWarning:boolean=false;
+  
 
   ngOnInit()
   {
@@ -134,6 +138,11 @@ p {
     })
   }
 
+
+  ngOnDestroy(){
+    clearInterval(this.countdownInterval);
+  }
+
  
   startTimer() {
     const startTime = this.cacheService.get('round2')?.startTime;
@@ -147,35 +156,21 @@ p {
         (new Date().getTime() - startTime) / 1000
       );
       totalSeconds -= elapsedSeconds;
+      
+      if(totalSeconds <= this.warnTime){
+        this.showTimeWarning = true;
+      }
 
       if (totalSeconds <= 0) {
         totalSeconds = 0;
+        this.submit()
         clearInterval(this.countdownInterval);
         console.log('Timer finished');
       }
     }
 
     this.countdownInterval = setInterval(() => {
-      const startTime = this.cacheService.get('round2')?.startTime;
-      if (startTime) {
-        const elapsedSeconds = Math.floor(
-          (new Date().getTime() - startTime) / 1000
-        );
-        totalSeconds = 3600 - elapsedSeconds;
-
-        if (totalSeconds > 0) {
-          const hours = Math.floor(totalSeconds / 3600);
-          const minutes = Math.floor((totalSeconds % 3600) / 60);
-          const seconds = totalSeconds % 60;
-
-          this.timeLeft = this.formatTime(hours, minutes, seconds);
-        } else {
-          totalSeconds = 0;
-          this.timeLeft = this.formatTime(0, 0, 0);
-          clearInterval(this.countdownInterval);
-          console.log('Timer finished');
-        }
-      }
+      this.updateTime()
     }, 1000);
   }
 
@@ -198,19 +193,44 @@ p {
         );
         totalSeconds = 3600 - elapsedSeconds;
 
+
         if (totalSeconds > 0) {
           const hours = Math.floor(totalSeconds / 3600);
           const minutes = Math.floor((totalSeconds % 3600) / 60);
           const seconds = totalSeconds % 60;
 
           this.timeLeft = this.formatTime(hours, minutes, seconds);
+
+          
+          if(totalSeconds <= this.warnTime){
+            this.showTimeWarning = true;
+            if(seconds == 0){
+              this.showTimeWarningAlert(minutes);
+            }
+          }
+
         } else {
           totalSeconds = 0;
+          this.submit()
           this.timeLeft = this.formatTime(0, 0, 0);
           console.log('Timer finished');
         }
       }
   }
+
+  showTimeWarningAlert(minutes: number) {
+
+    const timeFormatted = `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+    const errorMessage = `You have ${timeFormatted} remaining to complete your submission. Please hurry up!`;
+
+    this.messageService.add({
+        severity: 'error',
+        summary: 'Time Warning',
+        detail: errorMessage,
+        icon:'pi pi-stopwatch'
+    });
+}
+
 
   padZero(num: number): string {
     return num < 10 ? '0' + num : num.toString();
@@ -375,12 +395,25 @@ p {
     });
   }
 
-  submit(event: Event): void {
-    event.preventDefault();
+
+  confirmSubmit(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.submit();
+      }
+    });
+  }
+
+  submit(): void {
 
     this.loading = true;
     let team = this.userService.team;
     const postBody = {code:this.combinedCode,teamId:team?.teamId}
+  
     this.apiService
       .post('/submit/round2', postBody)
       .pipe(
@@ -404,11 +437,11 @@ p {
             detail: 'Submitted Code,Please wait for Evaluation',
           });
           this.cacheService.put('round2',{'submitted':true})
+          clearInterval(this.countdownInterval)
           setTimeout(()=>{
             this.cacheService.delete('round2');
           },10000)
           this.router.navigateByUrl('/dashboard')
-
           
     
         },

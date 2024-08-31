@@ -16,12 +16,12 @@
   </div>
 
   <div class="appbar-right">
-    <button class="app-timer">
-      <mat-icon>timer</mat-icon>
+    <button [class.warning]="this.showTimeWarning" class="app-timer">
+      <mat-icon>alarm</mat-icon>
       <span> {{ this.timeLeft }}</span>
     </button>
 
-    <button (click)="submit($event)" class="app-submit">
+    <button (click)="confirmSubmit()" class="app-submit">
       <mat-progress-spinner
       [diameter]="20"
       [strokeWidth]="2"

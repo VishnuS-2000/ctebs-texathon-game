@@ -4,8 +4,8 @@
     
   
     <div class="appbar-right">
-      <button class="app-timer">
-        <mat-icon>timer</mat-icon>
+      <button [class.warning]="showTimeWarning"   class="app-timer">
+        <mat-icon>alarm</mat-icon>
         <span>{{ timeLeft}}</span>
       </button>
 

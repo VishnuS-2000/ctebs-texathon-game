@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { CacheService } from '../../../services/cache.service';
 import { TimerService } from '../../../services/timer.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-quizheader',
@@ -11,9 +12,14 @@ import { TimerService } from '../../../services/timer.service';
 export class QuizheaderComponent {
   remainingTime!: Observable<string>;
   timeLeft: string = '00:15:00';
+  showTimeWarning:boolean  = false;
+  warnTime:number = 5*60;
+  
+
+
   private countdownInterval: any;
   @Output() timerExpired = new EventEmitter<void>();
-  constructor(private cacheService: CacheService,) {}
+  constructor(private cacheService: CacheService,private messageService:MessageService) {}
 
   ngOnInit(): void {
     this.startTimer(); 
@@ -59,11 +65,22 @@ export class QuizheaderComponent {
         (new Date().getTime() - startTime) / 1000
       );
       totalSeconds = 900 - elapsedSeconds;
+      
+      if(totalSeconds<=this.warnTime){
+        this.showTimeWarning = true;
+      }
 
       if (totalSeconds > 0) {
         const hours = Math.floor(totalSeconds / 900);
         const minutes = Math.floor((totalSeconds % 900) / 60);
         const seconds = totalSeconds % 60;
+
+        if(totalSeconds <= this.warnTime){
+          this.showTimeWarning = true;
+          if(seconds == 0){
+            this.showTimeWarningAlert(minutes);
+          }
+        }
 
         this.timeLeft = this.formatTime(hours, minutes, seconds);
       } else {
@@ -74,6 +91,19 @@ export class QuizheaderComponent {
         console.log('Timer finished');
       }
   }
+}
+
+showTimeWarningAlert(minutes: number) {
+
+  const timeFormatted = `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+  const errorMessage = `You have ${timeFormatted} remaining to complete your submission. Please hurry up!`;
+
+  this.messageService.add({
+      severity: 'error',
+      summary: 'Time Warning',
+      detail: errorMessage,
+      icon:'pi pi-stopwatch'
+  });
 }
 
   formatTime(hours: number, minutes: number, seconds: number): string {

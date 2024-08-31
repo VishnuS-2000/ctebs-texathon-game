@@ -3,11 +3,13 @@ import { Router } from '@angular/router';
 import { TimerService } from '../services/timer.service';
 import { QuizService } from './services/quiz.service';
 import { UserService } from '../services/user.service';
-import { Subscription } from 'rxjs';
+import { Subscription, catchError, throwError } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { CacheService } from '../services/cache.service'; // Import CacheService
 import { QuizheaderComponent } from './components/quizheader/quizheader.component';
+import { ApiService } from '../services/api.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'texathon-quiz',
@@ -25,11 +27,17 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
   isConfirmedToLeave = false;
   questionNumbers: number[] = [];
   @ViewChild(QuizheaderComponent) headerComponent!: QuizheaderComponent; 
+
+  loading:boolean = true;
   constructor(
     private quizService: QuizService,
     private userService: UserService,
     private dialog: MatDialog,
-    private quizround: CacheService // Inject CacheService as quizround
+    private cacheService: CacheService,
+    private apiService:ApiService,
+    private messageService:MessageService,
+    private router:Router
+
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +48,6 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
       this.questions = data;
       this.totalQuestions = this.questions.length;
       
-      // Initialize questionNumbers array
       this.questionNumbers = Array.from({ length: this.totalQuestions }, (_, i) => i + 1);
 
       const savedAnswers = this.loadAnswersFromCache();
@@ -83,7 +90,7 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
     const cleanUpBeforeUnload = (event: BeforeUnloadEvent) => {
       if (this.isConfirmedToLeave) {
         const username = this.userService.getUsername();
-        this.quizround.delete(`${username}_quiz_answers`);
+        this.cacheService.delete(`${username}_quiz_answers`);
       }
     };
 
@@ -124,7 +131,7 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
 
   loadAnswersFromCache(): { [key: number]: any } {
     const username = this.userService.getUsername();
-    return this.quizround.get(`${username}_quiz_answers`) || {};
+    return this.cacheService.get(`${username}_quiz_answers`) || {};
   }
 
   saveAnswersToCache(): void {
@@ -136,7 +143,7 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
       };
       return acc;
     }, {});
-    this.quizround.set(`${username}_quiz_answers`, answers);
+    this.cacheService.set(`${username}_quiz_answers`, answers);
   }
 
   nextQuestion(): void {
@@ -187,10 +194,10 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
   }
 
   completeQuiz(): void {
-    this.headerComponent.stopTimer();
     this.quizCompleted = true;
     this.calculateResults();
     this.saveQuizResults();
+    this.submitQuiz();
   }
 
   calculateResults(): void {
@@ -232,8 +239,55 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
       attendedQuestions: this.attendedQuestions,
       totalMarks: this.totalMarks
     });
-    this.quizround.delete(`${username}_quiz_answers`);
+    this.cacheService.delete(`${username}_quiz_answers`);
+    
   }
+
+  submitQuiz(): void {
+
+    this.loading = true;
+    let team = this.userService.team;
+    const postBody = {score:this.totalMarks,teamId:team?.teamId}
+  
+    this.apiService
+      .post('/submit/round1', postBody)
+      .pipe(
+        catchError((error) => {
+          this.loading = false;
+          const errorMessage = error?.message || 'An unknown error occurred!';
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Submission Failed',
+            detail: errorMessage,
+          });
+          return throwError(() => error);
+        })
+      )
+      .subscribe({
+        next: (response: any) => {
+          this.loading = false;
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Round 1 Completed',
+            detail: 'Submitted Code,Please wait for Evaluation',
+          });
+          this.cacheService.put('round1',{'submitted':true})
+          this.headerComponent.stopTimer()
+          setTimeout(()=>{
+            this.cacheService.delete('round1');
+          },10000)
+          this.router.navigateByUrl('/dashboard')
+          
+    
+        },
+        error: () => {
+          this.loading = false;
+        },
+      });
+  }
+
+
+  
 
   restartQuiz(): void {
     this.currentQuestionIndex = 0;
@@ -246,7 +300,7 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
       question.selectedOptions = [];
     }
 
-    this.quizround.delete(`${this.userService.getUsername()}_quiz_answers`);
+    this.cacheService.delete(`${this.userService.getUsername()}_quiz_answers`);
 
     // this.router.navigate(['/login']);
   }

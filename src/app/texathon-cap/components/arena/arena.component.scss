@@ -50,6 +50,13 @@
     align-items: center;
     gap: 8px;
     color: rgba(255, 255, 255, 1);
+    transition: color 600ms;
+
+
+    &.warning{
+      color: #E4003A;
+    }
+    
   }
 
   .app-submit {
