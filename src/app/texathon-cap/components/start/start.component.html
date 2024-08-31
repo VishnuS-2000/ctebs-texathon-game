@@ -5,18 +5,29 @@
         <img src="assets/logo/texathon.png" class="event-logo"/>
         
 
+        
 
         <div class="rounds-container">
 
-        <div class="round-card" *ngFor="let round of rounds">
+        <div class="round-card" *ngFor="let round of rounds;let i = index;" [class.enabled]="(i+1) <= openRound">
+          <img [src]="round?.isSurprise && (i+1)>openRound ? 'assets/rounds/surprise-round.png': 'assets/rounds/'  + round.image" class="card-image" />
+
           <div class="card-header">
-            <span class="title">{{round}}</span>
-            <div class="card-body">
-                <span>
-                  <mat-icon>clock</mat-icon>
-                </span>
+            <span class="title">{{'Round ' + (i+1)}}</span>
+            <div class="">
+              <span class="round-title">{{round?.name}}</span>
             </div>
-            <button  class="app-start" (click)="start()" >
+            <div class="card-body">
+                <span class="duration-container">
+                  <mat-icon class="icon">alarm</mat-icon>
+                  <span class="duration">{{round?.duration}}</span>
+                </span>
+
+               
+            </div>
+
+            
+            <button  class="app-start"  (click)="start()" *ngIf="round?.isOnline && openRound == (i+1)">
               <mat-progress-spinner
               [diameter]="20"
               [strokeWidth]="2"
@@ -27,7 +38,24 @@
               >
               </mat-progress-spinner>
              <span *ngIf="!loading">Start</span>
-          </button>    
+
+          </button>  
+
+
+          <button  class="app-start disabled"  [disabled]="true"  *ngIf="i+1 < openRound && scores[i]!=0">
+           
+            <mat-icon >check_circle</mat-icon>
+            <span>{{scores[i] + '/' + totalScores[i]}}</span>
+
+        </button>  
+
+        <button  class="app-start disabled"  [disabled]="true"  *ngIf="i+1 < openRound && scores[i]==0">
+           
+          <mat-icon >hourglass_top</mat-icon>
+          <span>Result Pending</span>
+
+        </button>  
+                
           </div>
         </div>
     </div>

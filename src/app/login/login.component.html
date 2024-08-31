@@ -1,23 +1,55 @@
-<div class="login-container">
-  <div class="login-images">
-    <img src="../assets/images/ctebs.svg" style="height: 30%; width:50%;">
-    <img src="../assets/images/presents.svg" style="height: 20%; width:10%;align-items: center;">
-    <img src="../assets/images/texathon.png" style="height: 80%; width:70%;">
+<div class="login-wrapper">
+  <div class="logo-wrapper">
+    <img src="assets/logo/ctebs.svg" class="company-logo">
+    <img src="assets/logo/presents.svg" class="presents">
+    <img src="assets/logo/texathon.png" class="event-logo">
   </div>
   <div class="card login-card">
     <div class="card-body">
       <h2 class="card-title text-center">Login</h2>
-      <form>
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" class="form-control" id="username" [(ngModel)]="username" name="username">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password">
-        </div>
-        <button type="button" class="btn btn-primary btn-block" (click)="login()">Login</button>
-      </form>
+     
+      <form  class="form" [formGroup]="loginForm" (ngSubmit)="login($event)">
+            <div class="form-input-wrapper">
+            <div class="p-field">
+                <label for="username">Username</label>
+                <span class="p-input-icon-left">
+                  <i class="pi pi-user"></i>
+                  <input id="username" type="text" pInputText formControlName="username"/>
+                </span>
+                <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="p-error">
+                  Username is required.
+                </div>
+              </div>
+            
+              <div class="p-field">
+                <label for="password">Password</label>
+                <span class="p-input-icon-left p-input-icon-right">
+                  <i class="pi pi-lock"></i>
+                  <input id="password" [type]="passwordFieldType" pInputText formControlName="password"/>
+                  <i class="pi" [ngClass]="passwordFieldType === 'password' ? 'pi-eye-slash' : 'pi-eye'" (click)="togglePasswordVisibility()"></i>
+                </span>
+                <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="p-error">
+                  Password is required.
+                </div>
+              </div>
+            </div> 
+          
+            <button class="app-start" type="submit">
+              <ng-container *ngIf="loading; else loginText">
+                  <mat-progress-spinner
+                      [diameter]="20"
+                      [strokeWidth]="2"
+                      color="primary"
+                      mode="indeterminate"
+                      class="custom-spinner">
+                  </mat-progress-spinner>
+              </ng-container>
+              <ng-template #loginText>
+                  <span>Login</span>
+              </ng-template>
+          </button>
+          
+             </form>
     </div>
   </div>
 </div>
