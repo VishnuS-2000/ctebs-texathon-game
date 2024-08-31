@@ -1,0 +1,81 @@
+<div class="start-wrapper">
+    <div class="logo-wrapper">
+        <img src="assets/logo/ctebs.svg" class="company-logo"/>
+        <img src="assets/logo/presents.svg" class="presents"/>
+        <img src="assets/logo/texathon.png" class="event-logo"/>
+        
+
+
+        <div class="rounds-container">
+
+        <div class="round-card" [ngStyle]="getTransformStyle(i)" *ngFor="let round of rounds;let i = index;" [class.enabled]="(i+1) <= openRound">
+          <img [src]="round?.isSurprise && (i+1)>openRound ? 'assets/rounds/surprise-round.png': 'assets/rounds/'  + round.image" class="card-image" />
+
+          <div class="card-header">
+            <span class="title">{{'Round ' + (i+1)}}</span>
+            <div class="">
+              <span class="round-title">{{round?.name}}</span>
+            </div>
+            <div class="card-body">
+                <span class="duration-container">
+                  <mat-icon class="icon">alarm</mat-icon>
+                  <span class="duration">{{round?.duration}}</span>
+                </span>
+
+               
+            </div>
+
+            
+            <button  class="app-start"  (click)="checkRoundAllowed(round,i,$event)" *ngIf="round?.isOnline && openRound == (i+1) && !isRoundSubmitted(round?.cacheKey)">
+              <mat-progress-spinner
+              [diameter]="20"
+              [strokeWidth]="2"
+              color="primary"
+              mode="indeterminate"
+              class="custom-spinner"
+              *ngIf="loading"
+              >
+              </mat-progress-spinner>
+              <span *ngIf="!loading">
+                <ng-container *ngIf="isRoundStarted(round?.cacheKey); else startButtonTemplate">
+                  <span>Resume</span>
+                </ng-container>
+                <ng-template #startButtonTemplate>
+                  <span>Start</span>
+                </ng-template>
+              </span>
+              
+
+          </button>  
+
+
+          <button  class="app-start disabled"  [disabled]="true"  *ngIf="i+1 < openRound && scores[i]!=0" >
+           
+            <mat-icon >check_circle</mat-icon>
+            <span>{{scores[i] + '/' + totalScores[i]}}</span>
+
+        </button>  
+
+        <button  class="app-start disabled"  [disabled]="true"  *ngIf="i+1 < openRound && scores[i]==0 || isRoundSubmitted(round?.cacheKey)" >
+           
+          <mat-icon >hourglass_top</mat-icon>
+          <span>Result Pending</span>
+
+        </button>  
+                
+          </div>
+        </div>
+    </div>
+
+
+        
+       
+         
+        
+
+
+        
+    </div>
+ 
+
+</div>
