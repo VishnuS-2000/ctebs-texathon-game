@@ -10,6 +10,7 @@ import { MessageService } from 'primeng/api';
 import { ApiService } from '../services/api.service';
 import { catchError, throwError } from 'rxjs';
 import { CacheService } from '../services/cache.service';
+import { FullScreenService } from '../services/fullscreen.service';
 
 @Component({
   selector: 'app-login',
@@ -40,7 +41,7 @@ export class LoginComponent {
 
 
   passwordFieldType: string = 'password';
-  constructor(private router: Router,private apiService:ApiService, private userService: UserService,private fb:FormBuilder,private messageService:MessageService,private cacheService:CacheService) {}
+  constructor(private router: Router,private apiService:ApiService, private userService: UserService,private fb:FormBuilder,private messageService:MessageService,private cacheService:CacheService,private fullScreenService:FullScreenService) {}
 
 
 
@@ -69,7 +70,8 @@ export class LoginComponent {
             if(response.data.team){
               setTimeout(()=>{
                 this.cacheService.set('team',response.data.team)
-                this.router.navigateByUrl('/round2')
+                this.fullScreenService.startFullScreen();
+                this.router.navigateByUrl('/dashboard')
               },1000)
             
             }
@@ -87,5 +89,6 @@ export class LoginComponent {
       });
     }
   }
-  
+
+ 
 }

@@ -101,9 +101,8 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
       if (forbiddenKeys.includes(event.key)) {
         event.preventDefault();
       }
-      if (event.key === 'Escape') {
-        // navigator.keyboard.lock();
-      }
+      
+      // Block Ctrl/Command + R, Ctrl/Command + W
       if ((event.ctrlKey || event.metaKey) && forbiddenCtrlKeys.includes(event.key.toLowerCase())) {
         event.preventDefault();
       }

@@ -132,9 +132,11 @@
 
 .output {
   flex-grow: 1;
-  width: 100%;
+  width: 98%;
   height: 100%;
   border: none;
+  position: relative;
+  left: 2%;
   display: flex;
 }
 .resize-handle {

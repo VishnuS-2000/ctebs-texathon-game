@@ -17,7 +17,6 @@ import { CapArenaComponent } from './components/arena/arena.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 import { CapDocumentationComponent } from './components/documentation/documentation.component';
 import { MatIconModule } from '@angular/material/icon';
-import { CapStartComponent } from './components/start/start.component';
 import { TexathonCapRoutingModule } from './texathon-cap.routing.module';
 import { CardModule } from 'primeng/card';
 
@@ -45,7 +44,7 @@ import { CardModule } from 'primeng/card';
     MatIconModule,
     TexathonCapRoutingModule,
     CardModule,
-    CapStartComponent
+    MatIconModule
   
   ],
 })

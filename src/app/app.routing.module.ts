@@ -2,6 +2,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 export const routes: Routes = [
   {
     path:'round1',
@@ -17,6 +19,10 @@ export const routes: Routes = [
   {
     path:'login',
     component:LoginComponent
+  },{
+    path:'dashboard',
+    canActivate:[AuthGuard],
+    component:DashboardComponent
   }
 
 

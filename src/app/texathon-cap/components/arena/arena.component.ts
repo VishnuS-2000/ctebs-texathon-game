@@ -12,6 +12,8 @@ import { CapDocumentationComponent } from '../documentation/documentation.compon
 import { ApiService } from '../../../services/api.service';
 import { catchError, debounceTime, throwError } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'cap-arena',
@@ -38,8 +40,31 @@ export class CapArenaComponent {
 
   loading: boolean = false;
 
-  htmlInitial = `<!DOCTYPE html>\n<html>\n<head>\n  <title>Preview</title>\n</head>\n<body>\n<h1>Welcome to Texathon</h1>\n</body>\n</html>`;
-  cssIntial = `body {\n  font-family: Arial, sans-serif;\n}\nh1 {\n  color: green;\n}`;
+  htmlInitial = `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Texathon - Round 2 - Pookalam</title>
+      <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+      <header>
+          <h1>Texathon - Round 2 - Onam Odyssey</h1>
+          <p>Design a Beautiful Pookalam using HTML CSS</p>
+      </header>
+             
+  </body>
+  </html>`;
+  cssInitial = `h1 {
+    color: rgb(12, 152, 19);
+}
+
+p {
+    font-size: 18px;
+    font-weight: 500;
+}`;
+
   jsInitial = `document.querySelector('h1').innerText = 'Hello, Monaco Editor!';`;
 
   
@@ -49,7 +74,9 @@ export class CapArenaComponent {
     private cacheService: CacheService,
     private dialog: MatDialog,
     private apiService:ApiService,
-    private messageService:MessageService
+    private messageService:MessageService,
+    private router:Router,
+    private userService:UserService
   ) {}
 
   @ViewChild('leftWrapper') leftWrapper!: ElementRef;
@@ -79,6 +106,7 @@ export class CapArenaComponent {
   ngOnInit()
   {
 
+  
     let cache = this.cacheService.get('round2');
 
     if(cache?.html){
@@ -90,7 +118,7 @@ export class CapArenaComponent {
     if(cache?.css){
       this.cssControl.setValue(cache?.css)
     }else{
-      this.cssControl.setValue(this.cssIntial)
+      this.cssControl.setValue(this.cssInitial)
     }
 
     this.htmlControl.valueChanges.pipe(debounceTime(300)).subscribe((value)=>{
@@ -98,15 +126,17 @@ export class CapArenaComponent {
       this.updatePreview()
     })
 
+    this.updateTime()
+
     this.cssControl.valueChanges.pipe(debounceTime(300)).subscribe((value)=>{
       this.cacheService.put('round2',{css:value})
       this.updatePreview()
     })
   }
-  
 
+ 
   startTimer() {
-    const startTime = this.cacheService.get('round2').startTime;
+    const startTime = this.cacheService.get('round2')?.startTime;
     let totalSeconds = 3600;
 
     if (!startTime) {
@@ -159,6 +189,29 @@ export class CapArenaComponent {
     );
   }
 
+  updateTime(){
+    const startTime = this.cacheService.get('round2')?.startTime;
+    let totalSeconds = 3600;
+      if (startTime) {
+        const elapsedSeconds = Math.floor(
+          (new Date().getTime() - startTime) / 1000
+        );
+        totalSeconds = 3600 - elapsedSeconds;
+
+        if (totalSeconds > 0) {
+          const hours = Math.floor(totalSeconds / 3600);
+          const minutes = Math.floor((totalSeconds % 3600) / 60);
+          const seconds = totalSeconds % 60;
+
+          this.timeLeft = this.formatTime(hours, minutes, seconds);
+        } else {
+          totalSeconds = 0;
+          this.timeLeft = this.formatTime(0, 0, 0);
+          console.log('Timer finished');
+        }
+      }
+  }
+
   padZero(num: number): string {
     return num < 10 ? '0' + num : num.toString();
   }
@@ -171,6 +224,7 @@ export class CapArenaComponent {
       this.leftWrapper.nativeElement.parentElement,
       handle
     );
+    this.updatePreview()
     this.startTimer();
   }
 
@@ -257,6 +311,8 @@ export class CapArenaComponent {
       `${newWidthRight}px`
     );
 
+    this.updatePreview();
+
     const handle = document.querySelector('.resize-handle') as HTMLElement;
     if (handle) {
       handle.style.left = `${newWidthLeft}px`;
@@ -323,8 +379,8 @@ export class CapArenaComponent {
     event.preventDefault();
 
     this.loading = true;
-
-    const postBody = {code:this.combinedCode,teamId:22}
+    let team = this.userService.team;
+    const postBody = {code:this.combinedCode,teamId:team?.teamId}
     this.apiService
       .post('/submit/round2', postBody)
       .pipe(
@@ -344,9 +400,14 @@ export class CapArenaComponent {
           this.loading = false;
           this.messageService.add({
             severity: 'success',
-            summary: 'Submission Successfull',
-            detail: 'Successfully submitted code!',
+            summary: 'Round 2 Completed',
+            detail: 'Submitted Code,Please wait for Evaluation',
           });
+          this.cacheService.put('round2',{'submitted':true})
+          setTimeout(()=>{
+            this.cacheService.delete('round2');
+          },10000)
+          this.router.navigateByUrl('/dashboard')
 
           
     
