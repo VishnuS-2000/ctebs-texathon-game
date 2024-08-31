@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,8 +11,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./instruction-dialog.component.css']
 })
 export class InstructionDialogComponent {
-  constructor(private router: Router) {}
-  startQuiz(): void {
-    this.router.navigate(['/quiz']);  
+  @Input() title: string = ''; 
+  @Input() instructions: string[] = []; 
+
+  @Output() quizStarted = new EventEmitter<void>();
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+    this.title = data.title;
+    this.instructions = data.instructions;
   }
+
+  startQuiz(): void {
+    this.quizStarted.emit(); 
+    // this.router.navigate(['/quiz']); 
+  }
+  
+
 }

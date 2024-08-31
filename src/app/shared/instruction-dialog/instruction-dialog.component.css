@@ -1,47 +1,57 @@
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.instruction-card {
-  max-width: 600px; 
-  border-radius: 10px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+.card {
+  background-color: #fff;
+  border-radius: 20px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
 .card-body {
-  padding: 30px;
-  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 20px;
 }
 
 .card-title {
-  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
   font-size: 24px;
-  color: #343a40;
+  color: #333;
+}
+
+.list-group {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .list-group-item {
-  background-color: transparent; 
-  font-size: 18px;
-  padding: 15px 0; 
-  border: none;
-  color: #495057;
+  padding: 15px 10px;
+  font-size: 16px;
+  color: #555;
 }
 
-.btn-block {
+.list-group-item:last-child {
+  border-bottom: none;
+}
+
+.btn {
+  display: block;
+  width: 100%;
   padding: 12px;
   font-size: 18px;
-  border-radius: 5px;
-  font-weight: bold;
-}
-
-.btn-success {
-  background-color: #28a745; 
+  color: #fff;
+  background-color: #28a745;
   border: none;
+  border-radius: 12px; /* Adjust button border-radius if needed */
+  cursor: pointer;
+  text-align: center;
+  margin-top: 20px;
+  text-decoration: none;
 }
 
-.btn-success:hover {
-  background-color: #218838; 
+.btn:hover {
+  background-color: #218838;
+}
+
+.btn:active {
+  background-color: #1e7e34;
 }

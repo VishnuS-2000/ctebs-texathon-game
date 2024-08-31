@@ -5,11 +5,12 @@ import { QuizService } from './services/quiz.service';
 import { UserService } from '../services/user.service';
 import { Subscription, catchError, throwError } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+
 import { CacheService } from '../services/cache.service'; // Import CacheService
 import { QuizheaderComponent } from './components/quizheader/quizheader.component';
 import { ApiService } from '../services/api.service';
 import { MessageService } from 'primeng/api';
+import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'texathon-quiz',
@@ -181,17 +182,29 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
     return selectedOptions.includes(option);
   }
 
-  confirmSubmit(): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      disableClose: true
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.completeQuiz();
-      }
-    });
-  }
+ 
+    confirmSubmit(): void {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        width: '400px',
+        data: {
+          title: 'Confirm Submission',
+          message: 'Do you want to submit  your answers?',
+          cancelText: 'No',
+          confirmText: 'Yes'
+        }
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.completeQuiz();
+        } else {
+          // Handle cancellation logic here
+          console.log('Cancelled');
+        }
+      });
+     
+    }
+ 
 
   completeQuiz(): void {
     this.quizCompleted = true;
