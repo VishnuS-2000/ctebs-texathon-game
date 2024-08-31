@@ -9,9 +9,13 @@ import { TexathonQuizComponent } from './texathon-quiz.component';
 import { TexathonQuizRoutingModule } from './texathon-quiz.routing.module';
 import { CommonModule } from '@angular/common';
 import { CheckboxModule } from 'primeng/checkbox';
+import { QuizheaderComponent } from './components/quizheader/quizheader.component';
+import { MatIconModule } from '@angular/material/icon';
+import { RadioButtonModule } from 'primeng/radiobutton';
 @NgModule({
   declarations: [
     TexathonQuizComponent,
+    QuizheaderComponent
 
   ],
   imports: [
@@ -20,7 +24,9 @@ import { CheckboxModule } from 'primeng/checkbox';
     HttpClientModule,
     MatDialogModule,
     TexathonQuizRoutingModule,
-    CheckboxModule
+    CheckboxModule,
+    MatIconModule,
+    RadioButtonModule
   ],
   providers: [MatDialog],
   bootstrap: []

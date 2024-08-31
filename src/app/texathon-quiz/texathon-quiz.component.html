@@ -1,66 +1,91 @@
-<div *ngIf="!quizCompleted" class="bg">
-    <div class="card quiz-card">
-      <div class="card-body">
+<app-quizheader></app-quizheader>
+<div class="quiz-container">
+  <div class="quiz-card">
+    <div class="card-body">
+
+      <div *ngIf="!quizCompleted" class="content">
         <div class="question-wrapper mb-4">
-          <h4 class="question-number">Question: {{ currentQuestionIndex + 1 }}</h4>
+          <h4 class="question-number">Question: {{ currentQuestionIndex + 1 }}/{{questions.length}}</h4>
           <h3 class="question-text">{{ questions[currentQuestionIndex]?.question }}</h3>
         </div>
-  
+
         <div class="options-container mb-4">
           <div *ngIf="questions[currentQuestionIndex].type === 'multiple-choice'">
             <div *ngFor="let option of questions[currentQuestionIndex].options" class="form-check">
-              <input
-                type="radio"
+              <p-radioButton
                 name="option"
                 [(ngModel)]="questions[currentQuestionIndex].selectedOption"
                 [value]="option"
-                class="form-check-input"
-                id="option-{{option}}"
-              />
-              <label class="form-check-label" [for]="'option-' + option">
+                class="custom-radio"
+              ></p-radioButton>
+              <label class="form-check-label">
                 {{ option }}
               </label>
             </div>
           </div>
-  
+          
           <div *ngIf="questions[currentQuestionIndex].type === 'checkbox'">
             <div *ngFor="let option of questions[currentQuestionIndex].options" class="form-check">
-                <p-checkbox></p-checkbox>
-              <!-- <input
-                type="checkbox"
-                [value]="option"
-                (change)="toggleCheckbox(option)"
-                [checked]="questions[currentQuestionIndex].selectedOptions?.includes(option)"
-                class="form-check-input"
-                id="checkbox-{{option}}"
-              />
-              <label class="form-check-label" [for]="'checkbox-' + option">
-                {{ option }}
-              </label>
-            </div> -->
+              <p-checkbox
+                [binary]="true"
+                [inputId]="'checkbox-' + option"
+                (onChange)="toggleCheckbox(option)"
+                [ngModel]="isOptionSelected(option)"
+                class="custom-checkbox"
+              ></p-checkbox>
+              <label [for]="'checkbox-' + option" class="checkbox-label">{{ option }}</label>
+            </div>
           </div>
-  
+          
+          
           <div *ngIf="questions[currentQuestionIndex].type === 'fill-in-the-blank'">
             <input
-              type="text"
-              [(ngModel)]="questions[currentQuestionIndex].selectedOption"
-              placeholder="Type your answer here"
-              class="form-control"
-            />
+            pInputText
+            type="text"
+            [(ngModel)]="questions[currentQuestionIndex].selectedOption"
+            placeholder="Type your answer here"
+            style="width: 100%;height: 2.5rem; line-height: 2.5rem;"
+          />
           </div>
         </div>
-  
-        <div class="button-container d-flex justify-content-between">
-          <button class="btn btn-secondary" (click)="previousQuestion()">
+ <!-- Image with input field question -->
+ <div *ngIf="questions[currentQuestionIndex].type === 'image-with-input'">
+  <img
+    [src]="questions[currentQuestionIndex].imageUrl"
+    alt="Question Image"
+    style="max-width: 50%; margin-bottom: 1rem;"
+  />
+  <div>
+    <input
+      pInputText
+      type="text"
+      [(ngModel)]="questions[currentQuestionIndex].selectedOption"
+      placeholder="Type your answer here"
+      style="width: 100%;height: 2.5rem; line-height: 2.5rem;"
+    />
+  </div>
+</div>
+
+        <div class="button-container">
+          <button class="button-prev" (click)="previousQuestion()">
             << Prev
           </button>
-          <button class="btn btn-primary" (click)="nextQuestion()">Next >></button>
+          <button class="button-next" (click)="nextQuestion()">Next >></button>
         </div>
+      </div>
+
+      <div *ngIf="quizCompleted" class="results-container">
+        <h2 class="results-text">Attended Questions: {{ attendedQuestions }}/{{ questions.length }}</h2>
       </div>
     </div>
   </div>
-  
-  <div *ngIf="quizCompleted" class="results-container">
-    <h2 class="results-text">Attended Questions: {{ attendedQuestions }}/{{ questions.length }}</h2>
+  <div class="question-navigation"  *ngIf="!quizCompleted">
+    <button 
+      *ngFor="let num of questionNumbers" 
+      (click)="goToQuestion(num)" 
+      [ngClass]="{'question-button': true, 'answered': isQuestionAnswered(num), 'not-answered': !isQuestionAnswered(num)}"
+      class="question-button">
+      {{ num }}
+    </button>
   </div>
-  
+</div>

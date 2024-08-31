@@ -1,43 +1,70 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimerService {
-  private timerSubject = new BehaviorSubject<number>(30 * 60); // Default to 30 minutes in seconds
-  private intervalId?: number;
+  // constructor(
+  //   private cacheService: CacheService,
+  // ) {}
+  // timeLeft: string = '01:00:00';
+  // private countdownInterval: any;
 
-  timer$ = this.timerSubject.asObservable();
-  timerComplete$ = new Subject<void>();
-  constructor() {
-  }
 
-  
-  startTimer(): void {
-    if (this.intervalId) return; 
-    this.intervalId = window.setInterval(() => {
-      const currentTime = this.timerSubject.value;
-      if (currentTime > 0) {
-        const newTime = currentTime - 1;
-        this.timerSubject.next(newTime);
-      } else {
-        this.stopTimer();
-        this.timerComplete$.next(); 
-      }
-    }, 1000);
-  }
+  // startTimer() {
+  //   const startTime = this.cacheService.get('round2').startTime;
+  //   let totalSeconds = 3600;
 
-  stopTimer(): void {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-      this.intervalId = undefined;
-    }
-  }
+  //   if (!startTime) {
+  //     const currentTime = new Date().getTime();
+  //     this.cacheService.put('round2', {startTime:currentTime});
+  //   } else {
+  //     const elapsedSeconds = Math.floor(
+  //       (new Date().getTime() - startTime) / 1000
+  //     );
+  //     totalSeconds -= elapsedSeconds;
 
-  resetTimer(duration: number): void {
-    this.stopTimer();
-    this.timerSubject.next(duration);
-  }
-  
+  //     if (totalSeconds <= 0) {
+  //       totalSeconds = 0;
+  //       clearInterval(this.countdownInterval);
+  //       console.log('Timer finished');
+  //     }
+  //   }
+
+  //   this.countdownInterval = setInterval(() => {
+  //     const startTime = this.cacheService.get('round2')?.startTime;
+  //     if (startTime) {
+  //       const elapsedSeconds = Math.floor(
+  //         (new Date().getTime() - startTime) / 1000
+  //       );
+  //       totalSeconds = 3600 - elapsedSeconds;
+
+  //       if (totalSeconds > 0) {
+  //         const hours = Math.floor(totalSeconds / 3600);
+  //         const minutes = Math.floor((totalSeconds % 3600) / 60);
+  //         const seconds = totalSeconds % 60;
+
+  //         this.timeLeft = this.formatTime(hours, minutes, seconds);
+  //       } else {
+  //         totalSeconds = 0;
+  //         this.timeLeft = this.formatTime(0, 0, 0);
+  //         clearInterval(this.countdownInterval);
+  //         console.log('Timer finished');
+  //       }
+  //     }
+  //   }, 1000);
+  // }
+
+  // formatTime(hours: number, minutes: number, seconds: number): string {
+  //   return (
+  //     this.padZero(hours) +
+  //     ':' +
+  //     this.padZero(minutes) +
+  //     ':' +
+  //     this.padZero(seconds)
+  //   );
+  // }
+ 
 }

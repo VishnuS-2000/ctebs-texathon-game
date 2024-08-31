@@ -1,0 +1,46 @@
+.appbar {
+    background-color: #000000;
+    min-height: 48px;
+    max-height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0px 8px;
+  justify-content: space-between;
+    gap: 25px;
+  
+    .appbar-logo{
+      height: 48px;
+    }
+}
+.appbar-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+  
+    .divider {
+      color: rgba(255, 255, 255, 0.11);
+    }
+  }
+  
+  .appbar-right {
+    display: flex;
+    align-items: center;
+    padding: 0px 14px;
+    gap: 25px;
+  
+    .app-timer {
+      font-size: 14px;
+      background: none;
+      border: none;
+      outline: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, 1);
+    }
+    span{
+        color: rgba(255, 255, 255, 1);  
+    }
+  }  

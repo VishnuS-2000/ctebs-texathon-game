@@ -1,10 +1,36 @@
-[
-  {
-    "type": "multiple-choice",
-    "question": "_________French term for exclusive one-of-kind” high fashion",
-    "options": ["Boutique", "Show room", "Out let", "Haute couture’s"],
-    "answer": "Haute couture’s"
-  },
+[{
+  "type": "multiple-choice",
+  "question": "Your computer needs a(n) _____ to access a network.",
+  "options": ["SMS", "LTE", "NIC", "Bot"],
+  "answer": "NIC"
+},{
+  "type": "multiple-choice",
+  "question": "The term big data refers to the ________.",
+  "options": [
+    "Concerns about reactions to privacy infringement",
+    "Identify customers and get to know them in as much detail as possible",
+    "Exponential growth of structured and unstructured data that are difficult to process using traditional database techniques",
+    "Customize some aspects of the products or services offered to each customer"
+  ],
+  "answer": "Exponential growth of structured and unstructured data that are difficult to process using traditional database techniques"
+},
+{
+  "type": "multiple-choice",
+  "question": "The web was introduced in _______.",
+  "options": ["1989", "1978", "1971", "1983"],
+  "answer": "1989"
+},
+{
+  "type": "multiple-choice",
+  "question": "When loops are nested, _____.",
+  "options": [
+    "Both must be the same type—definite or indefinite",
+    "One must end before the other begins",
+    "They typically share a loop control variable",
+    "None of the above"
+  ],
+  "answer": "None of the above"
+},
   {
     "type": "multiple-choice",
     "question": "Which fiber is popularly called ‘Golden fiber’?",
@@ -18,18 +44,6 @@
     "answer": "Fashion Week"
   },
   {
-    "type": "multiple-choice",
-    "question": "Which type of fabric is derived from silkworms and is known for its luxurious, smooth texture?",
-    "options": ["Cotton", "Wool", "Satin", "Denim"],
-    "answer": "Satin"
-  },
-  {
-    "type": "multiple-choice",
-    "question": "Levi Strauss and Jacob Davis are usually credited with inventing which type of pants?",
-    "options": ["Chinos", "Leggings", "Denim jeans"],
-    "answer": "Denim jeans"
-  },
-  {
     "type": "checkbox",
     "question": "Select all that apply: Which materials are considered natural fibers?",
     "options": ["Cotton", "Polyester", "Wool", "Nylon"],
@@ -37,8 +51,153 @@
   },
   {
     "type": "fill-in-the-blank",
-    "question": "_________ is known as the ‘Golden fiber’.",
-    "answer": "Jute"
-  }
+    "question": "public class OutputTest {\n    public static void main(String[] args) {\n        int x = 5;\n        int y = ++x * 10 / x-- % 5;\n        System.out.println(y);\n    }\n}\n\nAns: ____",
+    "answer": "0"
+  },
+  {
+    "type": "multiple-choice",
+    "question": "What is the full form of SOAP in web services?",
+    "options": [
+      "Simple Object Access Protocol",
+      "Service-Oriented Access Protocol",
+      "Structured Object Application Protocol",
+      "Simple Oriented Application Protocol"
+    ],
+    "answer": "Simple Object Access Protocol"
+  },  
+  {
+    "type": "multiple-choice",
+    "question": "What will be the values of `a` and `b`?",
+    "options": [
+      "a = 31, b = 10",
+      "a = 30, b = 11",
+      "a = 29, b = 12",
+      "a = 32, b = 9"
+    ],
+    "answer": "a = 31, b = 10"
+  },
+  {
+    "type": "checkbox",
+    "question": "Select all that apply: Which of the following technologies are commonly used in modern data analytics?",
+    "options": ["Machine Learning", "Blockchain", "Big Data", "Edge Computing", "Virtual Reality"],
+    "answer": ["Machine Learning", "Big Data", "Edge Computing"]
+  },  
+  {
+    "type": "multiple-choice",
+    "question": "Which cloud platform is known for its BigQuery service?",
+    "options": ["Amazon Web Services", "Microsoft Azure", "Google Cloud Platform", "IBM Cloud"],
+    "answer": "Google Cloud Platform"
+  },
+  {
+    "type": "multiple-choice",
+    "question": "Which of the following is NOT a type of NoSQL database?",
+    "options": ["Document store", "Graph database", "OLAP", "Key-value store"],
+    "answer": "OLAP"
+  },
+  {
+    "type": "checkbox",
+    "question": "Select all that apply: Which of the following are considered best practices for DevOps implementation?",
+    "options": ["Continuous Integration", "Continuous Deployment", "Infrastructure as Code", "Manual Testing", "Configuration Management"],
+    "answer": ["Continuous Integration", "Continuous Deployment", "Infrastructure as Code", "Configuration Management"]
+  },  
+  {
+    "type": "multiple-choice",
+    "question": "Which of the following algorithms is not typically used for supervised learning?",
+    "options": ["Decision Trees", "Support Vector Machines", "K-Means Clustering", "Linear Regression"],
+    "answer": "K-Means Clustering"
+  },
+  {
+    "type": "fill-in-the-blank",
+    "question": "The technology that allows decentralized data storage and transaction verification is known as _____.",
+    "answer": "blockchain"
+  },  
+  {
+    "type": "checkbox",
+    "question": "Select all that apply: Which of the following are popular cloud service models?",
+    "options": ["Infrastructure as a Service (IaaS)", "Platform as a Service (PaaS)", "Software as a Service (SaaS)", "Database as a Service (DBaaS)", "Network as a Service (NaaS)"],
+    "answer": ["Infrastructure as a Service (IaaS)", "Platform as a Service (PaaS)", "Software as a Service (SaaS)"]
+  },  
+  {
+    "type": "multiple-choice",
+    "question": "What is a primary benefit of using machine learning over traditional data analysis methods?",
+    "options": ["Reduced need for data cleaning", "Ability to process structured data only", "Ability to make predictions on new data", "Simpler models"],
+    "answer": "Ability to make predictions on new data"
+  },
+  {
+    "type": "fill-in-the-blank",
+    "question": "A software development practice that involves integrating code changes into a shared repository multiple times a day is known as _____.",
+    "answer": "Continuous Integration"
+  },  
+  {
+    "type": "multiple-choice",
+    "question": "Which visualization tool is proprietary and known for its drag-and-drop interface?",
+    "options": ["GGplot2", "Matplotlib", "Tableau", "D3.js"],
+    "answer": "Tableau"
+  },
+  {
+    "type": "multiple-choice",
+    "question": "Which visualization is best suited for displaying the relationship between sales volume and profit margin over a year?",
+    "options": ["Pie Chart", "Line Graph", "Scatter Plot", "Histogram"],
+    "answer": "Scatter Plot"
+  },
+  {
+    "type": "multiple-choice",
+    "question": "Which of the following is NOT a type of NoSQL database?",
+    "options": ["Document store", "Graph database", "OLAP", "Key-value store"],
+    "answer": "OLAP"
+  },
+  {
+    "type": "multiple-choice",
+    "question": "What advantage does columnar storage have over row-based storage?",
+    "options": ["Faster write times", "Better data normalization", "Improved query performance on large datasets", "More efficient data integrity"],
+    "answer": "Improved query performance on large datasets"
+  }, 
+  {
+    "type": "checkbox",
+    "question": "Select all that apply: Which of the following are common methods for ensuring data security in cloud computing?",
+    "options": ["Encryption", "Firewalls", "Regular backups", "Access control", "Public Wi-Fi access"],
+    "answer": ["Encryption", "Firewalls", "Regular backups", "Access control"]
+  },   
+  {
+    "type": "fill-in-the-blank",
+    "question": "The color of the 'L' in the Google logo is _____.",
+    "answer": "green"
+  },      
+  {
+    "type": "image-with-input",
+    "question": "Identify the image:",
+    "imageUrl": "/assets/images/Telenor.jpg",
+    "answer": "Telenor"
+  },      
+  {
+    "type": "image-with-input",
+    "question": "Identify the image:",
+    "imageUrl": "/assets/images/snapdrag.png",
+    "answer": "Snapdragon"
+  },
+  {
+    "type": "multiple-choice",
+    "question": "In the realm of cybersecurity, what is the subtle yet insidious technique known as 'phishing,' and how does it exploit human psychology to compromise digital security?",
+    "options": [
+      "A form of social engineering that leverages deceptive tactics to trick individuals into divulging sensitive information or performing actions that can lead to security breaches.",
+      "A sophisticated malware attack that employs advanced techniques to infiltrate computer systems and steal data without detection.",
+      "A vulnerability in network infrastructure that can be exploited to gain unauthorized access to sensitive information.",
+      "A type of ransomware that encrypts data and demands a ransom payment for its release, often threatening to delete or publish the data if the ransom is not paid."
+    ],
+    "answer": "A form of social engineering that leverages deceptive tactics to trick individuals into divulging sensitive information or performing actions that can lead to security breaches."
+  },
+  {
+    "type": "checkbox",
+    "question": "Which of the following are popular data visualization tools? (Select all that apply)",
+    "options": ["Tableau", "Power BI", "Matplotlib", "Seaborn", "Plotly"],
+    "answer": ["Tableau", "Power BI", "Matplotlib", "Plotly"]
+  },
+  {
+    "type": "checkbox",
+    "question": "Which of the following are popular database management systems (DBMS) for NoSQL databases? (Select all that apply)",
+    "options": ["MongoDB", "Cassandra", "Redis", "MySQL", "PostgreSQL"],
+    "answer": ["MongoDB", "Cassandra", "Redis"]
+  }    
+  
   ]
   

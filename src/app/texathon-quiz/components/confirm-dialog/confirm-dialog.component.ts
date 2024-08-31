@@ -10,7 +10,6 @@ export class ConfirmDialogComponent {
   constructor(public dialogRef: MatDialogRef<ConfirmDialogComponent>) {}
 
   onConfirm(): void {
-    debugger
     this.dialogRef.close(true);
   }
 
