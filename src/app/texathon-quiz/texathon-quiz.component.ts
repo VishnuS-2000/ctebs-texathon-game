@@ -11,6 +11,7 @@ import { QuizheaderComponent } from './components/quizheader/quizheader.componen
 import { ApiService } from '../services/api.service';
 import { MessageService } from 'primeng/api';
 import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
+import { InstructionDialogComponent } from '../shared/instruction-dialog/instruction-dialog.component';
 
 @Component({
   selector: 'texathon-quiz',
@@ -61,6 +62,34 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
     });
   }
   ngAfterViewInit(): void {
+    
+    let alreadyBegin = this.cacheService.get('round1')?.startTime;
+
+
+    if(!alreadyBegin){
+      const dialogRef = this.dialog.open(InstructionDialogComponent,{
+        disableClose: true,
+      })
+      const componentInstance = dialogRef.componentInstance as InstructionDialogComponent
+      componentInstance.submitText = 'Start Quiz'
+      componentInstance.title = 'Round 1 Tech Trivia'
+      componentInstance.instructions = [
+        'Read each question carefully.',
+        'Select the correct answer from the provided options.',
+        'You have a limited time to complete the quiz.',
+        'The timer will start as soon as you click "Start Quiz".',
+        'Once the quiz is completed, the timer will stop automatically.',
+        
+      ]
+
+      componentInstance.accepted.subscribe((data)=>{
+        this.headerComponent.startTimer();
+      })
+    }else{
+      this.headerComponent.startTimer();
+    }
+   
+
     if (this.headerComponent) {
       this.subscription.add(
         this.headerComponent.timerExpired.subscribe(() => {
@@ -106,17 +135,17 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
       const forbiddenCtrlKeys = ['r', 'w'];
       const forbiddenCtrlShiftKeys = ['i', 'j'];
 
-      if (forbiddenKeys.includes(event.key)) {
-        event.preventDefault();
-      }
+      // if (forbiddenKeys.includes(event.key)) {
+      //   event.preventDefault();
+      // }
       
       // Block Ctrl/Command + R, Ctrl/Command + W
-      if ((event.ctrlKey || event.metaKey) && forbiddenCtrlKeys.includes(event.key.toLowerCase())) {
-        event.preventDefault();
-      }
-      if ((event.ctrlKey || event.metaKey) && event.shiftKey && forbiddenCtrlShiftKeys.includes(event.key.toLowerCase())) {
-        event.preventDefault();
-      }
+      // if ((event.ctrlKey || event.metaKey) && forbiddenCtrlKeys.includes(event.key.toLowerCase())) {
+      //   event.preventDefault();
+      // }
+      // if ((event.ctrlKey || event.metaKey) && event.shiftKey && forbiddenCtrlShiftKeys.includes(event.key.toLowerCase())) {
+      //   event.preventDefault();
+      // }
     });
   }
 
@@ -186,19 +215,20 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
     confirmSubmit(): void {
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         width: '400px',
-        data: {
-          title: 'Confirm Submission',
-          message: 'Do you want to submit  your answers?',
-          cancelText: 'No',
-          confirmText: 'Yes'
-        }
+        
       });
+
+      const componentInstance = dialogRef.componentInstance as ConfirmDialogComponent;
+
+      componentInstance.title =  'Confirm Submission',
+      componentInstance.message =  'Do you want to submit  your answers?',
+      componentInstance.cancelText = 'No',
+      componentInstance.confirmText = 'Yes'
   
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.completeQuiz();
         } else {
-          // Handle cancellation logic here
           console.log('Cancelled');
         }
       });

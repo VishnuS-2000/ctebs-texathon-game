@@ -41,17 +41,17 @@ export class AppComponent {
     const forbiddenCtrlKeys = ['r', 'w'];
     const forbiddenCtrlShiftKeys = ['i', 'j'];
 
-    if (forbiddenKeys.includes(event.key)) {
-      event.preventDefault(); 
-      event.stopPropagation(); 
-    }
+    // if (forbiddenKeys.includes(event.key)) {
+    //   event.preventDefault(); 
+    //   event.stopPropagation(); 
+    // }
 
-    if ((event.ctrlKey || event.metaKey) && forbiddenCtrlKeys.includes(event.key.toLowerCase())) {
-      event.preventDefault();
-    }
-    if ((event.ctrlKey || event.metaKey) && event.shiftKey && forbiddenCtrlShiftKeys.includes(event.key.toLowerCase())) {
-      event.preventDefault();
-    }
+    // if ((event.ctrlKey || event.metaKey) && forbiddenCtrlKeys.includes(event.key.toLowerCase())) {
+    //   event.preventDefault();
+    // }
+    // if ((event.ctrlKey || event.metaKey) && event.shiftKey && forbiddenCtrlShiftKeys.includes(event.key.toLowerCase())) {
+    //   event.preventDefault();
+    // }
 
   }
 }

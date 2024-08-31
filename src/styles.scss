@@ -16,3 +16,7 @@ body { margin: 0;   }
   .custom-spinner .mat-progress-spinner circle {
     stroke: #C5C5C5 !important; 
   }
+
+  .cdk-overlay-backdrop {
+    background-color: rgba(0, 0, 0, 0.85) !important; 
+  }

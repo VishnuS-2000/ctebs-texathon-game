@@ -10,7 +10,7 @@
         </div>
 
         <div class="options-container mb-4">
-          <div *ngIf="questions[currentQuestionIndex].type === 'multiple-choice'">
+          <div *ngIf="questions[currentQuestionIndex]?.type === 'multiple-choice'">
             <div *ngFor="let option of questions[currentQuestionIndex].options" class="form-check">
               <p-radioButton
                 name="option"
@@ -24,8 +24,8 @@
             </div>
           </div>
           
-          <div *ngIf="questions[currentQuestionIndex].type === 'checkbox'">
-            <div *ngFor="let option of questions[currentQuestionIndex].options" class="form-check">
+          <div *ngIf="questions[currentQuestionIndex]?.type === 'checkbox'">
+            <div *ngFor="let option of questions[currentQuestionIndex]?.options" class="form-check">
               <p-checkbox
                 [binary]="true"
                 [inputId]="'checkbox-' + option"
@@ -38,7 +38,7 @@
           </div>
           
           
-          <div *ngIf="questions[currentQuestionIndex].type === 'fill-in-the-blank'">
+          <div *ngIf="questions[currentQuestionIndex]?.type === 'fill-in-the-blank'">
             <input
             pInputText
             type="text"
@@ -49,7 +49,7 @@
           </div>
         </div>
  <!-- Image with input field question -->
- <div *ngIf="questions[currentQuestionIndex].type === 'image-with-input'">
+ <div *ngIf="questions[currentQuestionIndex]?.type === 'image-with-input'">
   <img
     [src]="questions[currentQuestionIndex].imageUrl"
     alt="Question Image"

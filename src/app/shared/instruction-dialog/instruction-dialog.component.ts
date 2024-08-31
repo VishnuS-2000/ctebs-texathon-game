@@ -1,29 +1,35 @@
+import { DialogRef } from '@angular/cdk/dialog';
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogContent, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 @Component({
   standalone:true,
-  imports:[CommonModule],
+  imports:[CommonModule,MatDialogModule],
   selector: 'instruction-dialog',
   templateUrl: './instruction-dialog.component.html',
   styleUrls: ['./instruction-dialog.component.css']
 })
 export class InstructionDialogComponent {
   @Input() title: string = ''; 
+  @Input() submitText:string = '';
   @Input() instructions: string[] = []; 
 
-  @Output() quizStarted = new EventEmitter<void>();
+  @Output() accepted = new EventEmitter<boolean>();
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    this.title = data.title;
-    this.instructions = data.instructions;
+
+  constructor(private dialogRef:DialogRef){
+  
   }
+  
+
+  
 
   startQuiz(): void {
-    this.quizStarted.emit(); 
-    // this.router.navigate(['/quiz']); 
+    this.accepted.emit(true); 
+    this.dialogRef.close();
+    
   }
   
 

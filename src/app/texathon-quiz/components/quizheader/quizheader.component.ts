@@ -22,13 +22,10 @@ export class QuizheaderComponent {
   constructor(private cacheService: CacheService,private messageService:MessageService) {}
 
   ngOnInit(): void {
-    this.startTimer(); 
     this.updateTime();
   }
 
-  ngAfterViewInit(){
-    this.startTimer();
-  }
+ 
   ngOnDestroy(): void {
     this.stopTimer();
   }

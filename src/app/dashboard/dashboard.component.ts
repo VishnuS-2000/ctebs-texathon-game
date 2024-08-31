@@ -75,7 +75,6 @@ export class   DashboardComponent{
       scale= 'scale(1)';
     }
     
-    console.log(scale)
     return {
       transform: scale
     };

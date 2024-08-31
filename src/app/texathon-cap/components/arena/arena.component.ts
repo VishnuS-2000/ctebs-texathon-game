@@ -15,6 +15,7 @@ import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
+import { InstructionDialogComponent } from '../../../shared/instruction-dialog/instruction-dialog.component';
 
 @Component({
   selector: 'cap-arena',
@@ -68,7 +69,16 @@ p {
 
   jsInitial = `document.querySelector('h1').innerText = 'Hello, Monaco Editor!';`;
 
-  
+  instructions=[
+    'Round 2 is Onam Odyssey: Code a Pookalam round using HTML and CSS.',
+  'Use may use provided documentation classes that define basic shapes and colors for faster development.(Optional)',
+  'You have a total time of 1 hour to complete the task.',
+  'The design will automatically submit after 1 hour.',
+  'Ensure that your code is clean and well-structured for readability and maintainability.',
+  'You can use any HTML and CSS techniques, including flexbox, grid, and media queries.',
+  'Feel free to use animations and transitions to enhance your Pookalam design',
+  'Creativity is encouraged, so think outside the box to create a unique and beautiful Pookalam.',
+]
 
   constructor(
     private renderer: Renderer2,
@@ -245,7 +255,25 @@ p {
       handle
     );
     this.updatePreview()
-    this.startTimer();
+
+    let alreadyBegin = this.cacheService.get('round2')?.startTime;
+
+
+    if(!alreadyBegin){
+      const dialogRef = this.dialog.open(InstructionDialogComponent,{
+        disableClose: true,
+      })
+      const componentInstance = dialogRef.componentInstance as InstructionDialogComponent
+      componentInstance.submitText = 'Start Design'
+      componentInstance.title = 'Round 2 Onam Odyssey'
+      componentInstance.instructions = this.instructions
+
+      componentInstance.accepted.subscribe((data:any)=>{
+        this.startTimer();
+      })
+    }else{
+      this.startTimer();
+    }
   }
 
   onMouseDown(event: MouseEvent) {

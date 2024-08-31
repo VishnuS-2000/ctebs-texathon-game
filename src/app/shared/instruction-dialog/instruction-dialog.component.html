@@ -1,14 +1,11 @@
 <div class="card">
   <div class="card-body">
-    <!-- Displaying the title -->
     <h2 class="card-title">{{ title }}</h2>
 
-    <!-- Displaying the instructions -->
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let instruction of instructions">{{ instruction }}</li>
     </ul>
 
-    <!-- Start Quiz Button -->
-    <button class="btn" (click)="startQuiz()">Start Quiz</button>
+    <button class="btn" (click)="startQuiz()">{{submitText}}</button>
   </div>
 </div>

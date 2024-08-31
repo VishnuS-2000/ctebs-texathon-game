@@ -61,7 +61,7 @@
 .cancel-button:focus,
 .confirm-button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.5); /* Green glow for focus */
+  box-shadow: 0 0 0 3px rgba(62, 222, 67, 0.5); /* Green glow for focus */
 }
 
 @media (max-width: 600px) {
