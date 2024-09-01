@@ -67,14 +67,14 @@
   },  
   {
     "type": "multiple-choice",
-    "question": "What will be the values of `a` and `b`?",
+    "question": "Which of the following commands is not used to modify the commit history?",
     "options": [
-      "a = 31, b = 10",
-      "a = 30, b = 11",
-      "a = 29, b = 12",
-      "a = 32, b = 9"
+      "git rebase",
+      "git reset",
+      "git cherry-pick",
+      "git stash"
     ],
-    "answer": "a = 31, b = 10"
+    "answer": "git stash"
   },
   {
     "type": "checkbox",
@@ -141,10 +141,10 @@
     "answer": "Scatter Plot"
   },
   {
-    "type": "multiple-choice",
-    "question": "Which of the following is NOT a type of NoSQL database?",
-    "options": ["Document store", "Graph database", "OLAP", "Key-value store"],
-    "answer": "OLAP"
+    "type": "checkbox",
+    "question": "Which of the following are popular database management systems (DBMS) for NoSQL databases? (Select all that apply)",
+    "options": ["MongoDB", "Cassandra", "Redis", "MySQL", "PostgreSQL"],
+    "answer": ["MongoDB", "Cassandra", "Redis"]
   },
   {
     "type": "multiple-choice",
@@ -166,13 +166,13 @@
   {
     "type": "image-with-input",
     "question": "Identify the image:",
-    "imageUrl": "/assets/images/Telenor.jpg",
+    "imageUrl": "assets/images/Telenor.jpg",
     "answer": "Telenor"
   },      
   {
     "type": "image-with-input",
     "question": "Identify the image:",
-    "imageUrl": "/assets/images/snapdrag.png",
+    "imageUrl": "assets/images/snapdrag.png",
     "answer": "Snapdragon"
   },
   {
@@ -187,17 +187,11 @@
     "answer": "A form of social engineering that leverages deceptive tactics to trick individuals into divulging sensitive information or performing actions that can lead to security breaches."
   },
   {
-    "type": "checkbox",
-    "question": "Which of the following are popular data visualization tools? (Select all that apply)",
-    "options": ["Tableau", "Power BI", "Matplotlib", "Seaborn", "Plotly"],
-    "answer": ["Tableau", "Power BI", "Matplotlib", "Plotly"]
-  },
-  {
-    "type": "checkbox",
-    "question": "Which of the following are popular database management systems (DBMS) for NoSQL databases? (Select all that apply)",
-    "options": ["MongoDB", "Cassandra", "Redis", "MySQL", "PostgreSQL"],
-    "answer": ["MongoDB", "Cassandra", "Redis"]
-  }    
+    "type": "multiple-choice",
+    "question": "Which technology is most associated with enabling real-time processing closer to data sources?",
+    "options": ["Cloud Computing", "Edge Computing", "Blockchain", "Mainframe Computing"],
+    "answer": "Edge Computing"
+  }
   
   ]
   

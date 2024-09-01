@@ -33,9 +33,10 @@ export class   DashboardComponent{
     openRound :any = {}
     scores:any=[0,0,0,0]
     totalScores:any = [60,100,40,100]
+    allowedRounds :any=[];
 
     
-    rounds=[{name:'Tech Trivia',duration:'30min',isOnline:true,image:'tech-trivia.png',url:'/round1',cacheKey:'round1'},
+    rounds=[{name:'Tech Trivia',duration:'15min',isOnline:true,image:'tech-trivia.png',url:'/round1',cacheKey:'round1'},
     {name:'Onam Odyssey',duration:'1hr',isOnline:true,image:'code-pookalam.png',isSurprise:true,url:'/round2',cacheKey:'round2'},
     {name:'Mystery Mechanism',duration:'15min',isOnline:false,image:'mystery-mechanism.png',isSurprise:true},
     {name:'Code Combat Arena',duration:'1hr',isOnline:false,image:'coding-rounds.png'}]
@@ -49,12 +50,26 @@ export class   DashboardComponent{
     ngOnInit(){
 
 
-        interval(5000).pipe(
+      this.fetchAllowedRounds()
+        interval(3000).pipe(
             switchMap(async () => this.userService.fetchTeamDetails()),
             takeUntil(this.unsubscribe$) 
           ).subscribe(
           (data:any) => {
               this.syncTeam();
+
+            },
+            error => {
+              console.error(error); 
+            }
+          );
+
+          interval(3000).pipe(
+            switchMap(async () => this.fetchAllowedRounds()),
+            takeUntil(this.unsubscribe$) 
+          ).subscribe(
+          (data:any) => {
+
             },
             error => {
               console.error(error); 
@@ -68,10 +83,38 @@ export class   DashboardComponent{
     this.scores = [this.team.round1,this.team.round2,this.team.round3,this.team.round4]
   }
 
+
+
+  fetchAllowedRounds(){
+    try{
+      this.apiService.get(`/allowedRounds`).pipe(catchError((err)=>{
+        return throwError(() => err)
+      })).subscribe({
+        next: (response: any) => {
+          if (response && response.data) {
+            console.log(response?.data)
+            if(response.data.allowedRounds){
+              this.allowedRounds = response?.data?.allowedRounds
+              
+            }
+          }
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      })
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  
+
   getTransformStyle(index: number): any {
     let scale = 'scale' + '(' + 0.85 + ')';
+    console.log(this.openRound)
 
-    if((index+1) == this.openRound){
+    if((index+1) == this.openRound && !this.rounds[index]?.isSurprise || (index+1) == this.openRound && this.rounds[index]?.isSurprise && this.allowedRounds.includes(index+1) ){
       scale= 'scale(1)';
     }
     

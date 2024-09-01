@@ -1,15 +1,29 @@
 <div class="start-wrapper">
     <div class="logo-wrapper">
+      <div class="logos">
+
         <img src="assets/logo/ctebs.svg" class="company-logo"/>
         <img src="assets/logo/presents.svg" class="presents"/>
         <img src="assets/logo/texathon.png" class="event-logo"/>
         
+      </div>
+
+      <div class="team">
+        <mat-icon>groups</mat-icon>
+        <span>{{team?.username}}</span>
+      </div>
 
 
         <div class="rounds-container">
 
-        <div class="round-card" [ngStyle]="getTransformStyle(i)" *ngFor="let round of rounds;let i = index;" [class.enabled]="(i+1) <= openRound">
-          <img [src]="round?.isSurprise && (i+1)>openRound ? 'assets/rounds/surprise-round.png': 'assets/rounds/'  + round.image" class="card-image" />
+        <div class="round-card" [ngStyle]="getTransformStyle(i)" *ngFor="let round of rounds;let i = index;" [class.enabled]=" (i+1) <= openRound && !round.isSurprise || round.isSurprise && allowedRounds?.includes(i+1)">
+        
+
+
+          
+          <div class="card-image-container">
+            <img [src]="round?.isSurprise && !allowedRounds?.includes(i+1) ? 'assets/rounds/surprise-round.png': 'assets/rounds/'  + round.image" class="card-image" />
+          </div>
 
           <div class="card-header">
             <span class="title">{{'Round ' + (i+1)}}</span>
