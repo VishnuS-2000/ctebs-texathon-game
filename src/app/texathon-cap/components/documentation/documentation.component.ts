@@ -79,7 +79,6 @@ export class CapDocumentationComponent{
         
         const className =  `${this.shapes[this.shapeSelected]?.value}-${this.shapes[this.shapeSelected]?.sizes[this.shapeSizeSelected]}`;
 
-        console.log(className);
         return className;
       }
 

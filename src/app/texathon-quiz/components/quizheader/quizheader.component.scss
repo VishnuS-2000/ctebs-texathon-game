@@ -42,7 +42,8 @@
       transition: color 600ms;
 
       &.warning{
-        color: rgb(188, 21, 21);
+        background-color: rgb(188, 21, 21);
+        border-radius: 5px;
       }
     }
     

@@ -175,7 +175,6 @@ p {
         totalSeconds = 0;
         this.submit()
         clearInterval(this.countdownInterval);
-        console.log('Timer finished');
       }
     }
 
@@ -223,7 +222,6 @@ p {
           totalSeconds = 0;
           this.submit()
           this.timeLeft = this.formatTime(0, 0, 0);
-          console.log('Timer finished');
         }
       }
   }

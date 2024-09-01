@@ -13,7 +13,7 @@ export class QuizheaderComponent {
   remainingTime!: Observable<string>;
   timeLeft: string = '00:15:00';
   showTimeWarning:boolean  = false;
-  warnTime:number = 5*60;
+  warnTime:number = 14*60;
   
 
 
@@ -46,7 +46,6 @@ export class QuizheaderComponent {
         totalSeconds = 0;
         this.timerExpired.emit();
         this.stopTimer();
-        console.log('Timer finished');
       }
     }
 
@@ -85,7 +84,6 @@ export class QuizheaderComponent {
         this.timeLeft = this.formatTime(0, 0, 0);
         this.timerExpired.emit();
         this.stopTimer();
-        console.log('Timer finished');
       }
   }
 }

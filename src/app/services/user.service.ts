@@ -51,7 +51,6 @@ export class UserService {
       })).subscribe({
         next: (response: any) => {
           if (response && response.data) {
-            console.log(response?.data)
             if(response.data.team){
                 this.cacheService.set('team',response.data.team)
             }

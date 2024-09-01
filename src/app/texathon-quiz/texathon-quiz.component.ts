@@ -232,7 +232,6 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
         if (result) {
           this.completeQuiz();
         } else {
-          console.log('Cancelled');
         }
       });
      

@@ -191,7 +191,16 @@
     "question": "Which technology is most associated with enabling real-time processing closer to data sources?",
     "options": ["Cloud Computing", "Edge Computing", "Blockchain", "Mainframe Computing"],
     "answer": "Edge Computing"
+  },{
+    "type": "multiple-choice",
+    "question": "What is synthetic data primarily used for in AI and machine learning?",
+    "options": [
+      "For creating more complex algorithms",
+      "As a substitute for real-world data in training models",
+      "For reducing the cost of hardware",
+      "As a replacement for human data scientists"
+    ],
+    "answer": "As a substitute for real-world data in training models"
   }
-  
   ]
   
