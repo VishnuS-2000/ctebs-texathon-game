@@ -43,12 +43,12 @@
 }
 
 .cancel-button {
-  background-color: #a86d67; /* Red for cancel */
+  background-color: #c53727; /* Red for cancel */
   color: #fff;
 }
 
 .confirm-button {
-  background-color: #68ad69; /* Green for confirm */
+  background-color: rgba(43, 182, 115, 1); /* Green for confirm */
   color: #fff;
 }
 

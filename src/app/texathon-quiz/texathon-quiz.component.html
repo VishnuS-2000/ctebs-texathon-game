@@ -82,13 +82,18 @@
       </div>
     </div>
   </div>
-  <div class="question-navigation"  *ngIf="!quizCompleted">
-    <button 
-      *ngFor="let num of questionNumbers" 
-      (click)="goToQuestion(num)" 
-      [ngClass]="{'question-button': true, 'answered': isQuestionAnswered(num), 'not-answered': !isQuestionAnswered(num)}"
-      class="question-button">
-      {{ num }}
-    </button>
+  <div  *ngIf="!quizCompleted">
+    <div class="question-navigation">
+      <button 
+        *ngFor="let num of questionNumbers" 
+        (click)="goToQuestion(num)" 
+        [ngClass]="{'question-button': true, 'answered': isQuestionAnswered(num), 'not-answered': !isQuestionAnswered(num)}"
+        class="question-button">
+        {{ num }}
+      </button>
+    </div>
+    <div>
+      <button [disabled]="!isSubmitButtonEnabled" class="button-next submit-button" (click)="finalSubmission()" >Submit</button>
+    </div>
   </div>
 </div>

@@ -50,6 +50,17 @@
   border-radius: 5px;
   cursor: pointer;
   color: #fff;
+  &.submit-button {
+    margin-top: 3rem;
+    margin-left: 16.5rem;
+   
+  }
+  &.submit-button:disabled {
+    background-color: gray;
+    margin-top: 3rem;
+    margin-left: 16.5rem;
+  }
+  
 }
 
 .button-prev {
@@ -129,6 +140,8 @@
   max-width: 200px; // Adjust as needed
   margin-left: 10rem;
 }
+
+
 
 .question-button {
   /* Base styles for buttons */

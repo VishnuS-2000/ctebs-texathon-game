@@ -29,6 +29,9 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
   isConfirmedToLeave = false;
   questionNumbers: number[] = [];
   @ViewChild(QuizheaderComponent) headerComponent!: QuizheaderComponent; 
+  visitedArray : any[] = []
+  isSubmitButtonEnabled: boolean = false;
+
 
   loading:boolean = true;
   constructor(
@@ -312,7 +315,7 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
           this.messageService.add({
             severity: 'success',
             summary: 'Round 1 Completed',
-            detail: 'Submitted Code,Please wait for Evaluation',
+            detail: 'Submitted Answers, Please wait for Evaluation.',
           });
           this.cacheService.put('round1',{'submitted':true})
           this.headerComponent.stopTimer()
@@ -347,11 +350,42 @@ export class TexathonQuizComponent implements OnInit, OnDestroy {
 
     // this.router.navigate(['/login']);
   }
+
   isQuestionAnswered(questionNumber: number): boolean {
     const questionIndex = questionNumber - 1;
     const question = this.questions[questionIndex];
-    return question?.selectedOption || question?.selectedOptions?.length > 0;
+
+    // Determine if the question is answered
+    const isAnswered = question?.selectedOption || question?.selectedOptions?.length > 0;
+
+    if (isAnswered) {
+      // Add to visitedArray if not already present
+      if (!this.visitedArray.includes(questionIndex)) {
+        this.visitedArray.push(questionIndex);
+      }
+    } else {
+      // Remove from visitedArray if present
+      const indexInVisitedArray = this.visitedArray.indexOf(questionIndex);
+      if (indexInVisitedArray !== -1) {
+        this.visitedArray.splice(indexInVisitedArray, 1);
+      }
+    }
+
+    // Update submit button state
+    this.updateSubmitButtonState();
+
+    return isAnswered;
   }
+
+  private updateSubmitButtonState(): void {
+    // Enable submit button if all questions have been visited
+    this.isSubmitButtonEnabled = this.visitedArray.length === this.questions.length;
+  }
+
+  finalSubmission() {
+    this.confirmSubmit()
+  }
+
   goToQuestion(questionNumber: number): void {
     if (questionNumber >= 1 && questionNumber <= this.questions.length) {
       this.saveAnswer();

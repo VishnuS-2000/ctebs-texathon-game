@@ -426,9 +426,14 @@ p {
 
   confirmSubmit(): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      disableClose: true
-    });
+      disableClose: true,
 
+    });
+    const componentInstance = dialogRef.componentInstance as ConfirmDialogComponent;
+    componentInstance.title =  'Confirm Submission',
+    componentInstance.message =  'Do you want to submit  your answers?',
+    componentInstance.cancelText = 'No',
+    componentInstance.confirmText = 'Yes'
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.submit();
