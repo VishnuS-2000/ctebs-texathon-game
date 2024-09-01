@@ -13,7 +13,7 @@ export class QuizheaderComponent {
   remainingTime!: Observable<string>;
   timeLeft: string = '00:15:00';
   showTimeWarning:boolean  = false;
-  warnTime:number = 14*60;
+  warnTime:number = 5*60;
   
 
 
