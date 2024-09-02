@@ -51,7 +51,7 @@ export class   DashboardComponent{
 
 
       this.fetchAllowedRounds()
-        interval(3000).pipe(
+        interval(5000).pipe(
             switchMap(async () => this.userService.fetchTeamDetails()),
             takeUntil(this.unsubscribe$) 
           ).subscribe(
@@ -64,7 +64,7 @@ export class   DashboardComponent{
             }
           );
 
-          interval(3000).pipe(
+          interval(5000).pipe(
             switchMap(async () => this.fetchAllowedRounds()),
             takeUntil(this.unsubscribe$) 
           ).subscribe(

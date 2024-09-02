@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TexathonCodeCombatComponent } from './texathon-code-combat/texathon-code-combat';
 
 export const routes: Routes = [
   {
@@ -25,8 +26,12 @@ export const routes: Routes = [
     component:DashboardComponent
   },
   {
+    path:'code-combat',
+    component:TexathonCodeCombatComponent
+  },
+  {
     path: '**',
-    redirectTo: 'results'
+    redirectTo: 'login'
   }
 
 
